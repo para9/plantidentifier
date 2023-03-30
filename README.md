@@ -85,3 +85,12 @@ PLANT_DETAILS_FILE_PATH = os.path.join(PROJECT_ROOT, 'data', 'Plant name and pro
 #saved it as config.py
 #
 ---------
+
+pushing to cloud
+
+--------
+#Gunicorn installation and addition in requirements.txt
+#created app.yaml file
+# GCP account creation and deploymnet 
+# Pushes the git repository to GCP
+---------

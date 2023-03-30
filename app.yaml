@@ -1,0 +1,25 @@
+runtime: python37
+
+service: flask-app
+
+env_variables:
+  FLASK_APP: app.py
+  GUNICORN_CMD_ARGS: "--bind=0.0.0.0:8080 --workers=2 --threads=4"
+
+entrypoint: gunicorn -b $PORT main:app
+
+handlers:
+- url: /.*
+  script: auto
+
+runtime_config:
+  python_version: 3.9
+
+manual_scaling:
+  instances: 1
+
+resources:
+  cpu: 1
+  memory_gb: 3
+  disk_size_gb: 10
+machine_type: custom-1-3072
