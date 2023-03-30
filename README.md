@@ -42,3 +42,46 @@ git config --global user.email "@xx.com"
 
 ----
 
+ignore the file not needed to push and create gitignore if not created earlier
+
+----
+touch .gitignore
+----
+
+add the files to commit to git
+
+---
+
+git add .
+git status
+---
+
+commit to git
+
+---
+
+git commit -m
+
+---
+
+push all the file to git
+
+------
+
+git push origin main
+
+------
+
+Export modle and preprocessed file to avoid hardcoded path to the files
+
+----
+import os
+
+# Define the file paths relative to the project root directory
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+MODEL_FILE_PATH = os.path.join(PROJECT_ROOT, 'models', 'my_model.h5')
+PREPROCESSED_FILE_PATH = os.path.join(PROJECT_ROOT, 'preprocessed', 'preprocessed_features.npy')
+PLANT_DETAILS_FILE_PATH = os.path.join(PROJECT_ROOT, 'data', 'Plant name and properties.xlsx')
+#saved it as config.py
+#
+---------

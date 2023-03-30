@@ -1,3 +1,4 @@
+import os
 import tensorflow as tf
 from flask import Flask, render_template, request
 import pandas as pd
@@ -5,18 +6,19 @@ import numpy as np
 from io import BytesIO
 from PIL import Image
 from fuzzywuzzy import process
+from config import MODEL_FILE_PATH, PREPROCESSED_FILE_PATH, PLANT_DETAILS_FILE_PATH
 
 
 app = Flask(__name__)
 
 # Load the new model
-new_model = tf.keras.models.load_model('/home/kunal/workspace/flask/my_model.h5')
+new_model = tf.keras.models.load_model(MODEL_FILE_PATH)
 
 # Load the preprocessed features
-preprocessed_features = np.load('/home/kunal/workspace/flask/preprocessed_features.npy')
+preprocessed_features = np.load(PREPROCESSED_FILE_PATH)
 
 # Load the plant details data
-plant_details = pd.read_excel('/home/kunal/Downloads/Plant name and properties.xlsx')
+plant_details = pd.read_excel(PLANT_DETAILS_FILE_PATH)
 
 EXPECTED_SHAPE = (1200, 900, 3)
 
@@ -38,8 +40,6 @@ def add():
 @app.route('/plant_identifier')
 def plant_identifier():
     return render_template('identifier.html')
-
-
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -64,13 +64,13 @@ def predict():
 def page_not_found(error):
     return render_template('error.html', error='Page not found'), 404
 
-
-
-
 @app.route('/', methods=['GET'])
 def hello_world():
     return render_template('index.html')
 
 if __name__=='__main__':
+    # Set the paths to the files
+    os.environ['MODEL_PATH'] = 'path/to/my_model.h5'
+    os.environ['PREPROCESSED_FEATURES_PATH'] = 'path/to/preprocessed_features.npy'
+    os.environ['PLANT_DETAILS_PATH'] = 'path/to/Plant name and properties.xlsx'
     app.run(port = 3001, debug=True)
-
