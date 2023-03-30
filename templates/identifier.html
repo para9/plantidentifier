@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head lang='en'>
+    <title>Plant Identification</title>
+</head>
+
+<body>
+    <ul>
+        <li><a href="#" onclick="uploadImage();">Upload Image</a></li>
+        <li><a href="#">Other Tab</a></li>
+        <li><a href="#">Another Tab</a></li>
+    </ul>
+
+    <section>
+        <form id="upload-form" class="p-3 text-center" action='/predict' method="post" enctype="multipart/form-data">
+            <p>Upload an image:</p>
+            <input class="from-control" type="file" name="imagefile" style="display:none;">
+            <br>
+            <input class="btn btn-primary mt-3" type="submit" value="Predict Image">
+        </form>
+    </section>
+
+    <script>
+        function uploadImage() {
+            var fileInput = document.createElement("input");
+            fileInput.type = "file";
+            fileInput.name = "imagefile";
+            fileInput.accept = "image/*";
+            fileInput.onchange = function() {
+                document.getElementById("upload-form").submit();
+            }
+            fileInput.click();
+        }
+    </script>
+</body>
+</html>
